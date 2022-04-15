@@ -1,0 +1,6 @@
+Input=readseds.gms
+Output=lst\readsets_state.lst
+ScrDir=225b
+SysDir=C:\GAMS\win64\30.3
+ScriptNext=225b\gamsnext.cmd
+--rmap=state

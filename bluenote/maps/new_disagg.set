@@ -1,0 +1,10 @@
+uti.(ele_uti),
+min.(col_min),
+pet.(ref_pet),
+nmp.(cmt_nmp),
+nmp.(gla_nmp),
+pmt.(alu_pmt),
+pmt.(sme_pmt),
+pmt.(ala_pmt),
+pmt.(irn_pmt),
+pmt.(stl_pmt)
