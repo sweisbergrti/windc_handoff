@@ -126,6 +126,21 @@ $LOAD co2perbtu_units
 $GDXIN
 
 
+* SHANE's EDITS BEGIN
+
+* read in data how to distribute oil demand across household quintiles
+SET hh / 1,2,3,4,5 /;
+* VMT is VMT (in miles, not millions, I've already converted); pct is percentage of whole
+SET values / VMT, pct /;
+PARAMETER vmt_hh(h, values);
+
+$GDXIN '%mapdir%%sep%..%sep%gdx%sep%vmt_hh.gdx'
+$LOAD vmt_hh
+
+display vmt_hh;
+
+* SHANE's EDITS END
+
 * -------------------------------------------------------------------
 * Define national totals:
 * -------------------------------------------------------------------
@@ -645,6 +660,12 @@ execute_unload '%system.fp%gdx%sep%id0test_after.gdx', id0=id0;
 
 cd0(yr,r,"oil") = cd0(yr,r,"oil") + seds_oil_demand(yr,r,"oil","ldv");
 
+* distribute new oil demand to households based off DOT highway data
+
+execute_unload '%system.fp%gdx%sep%hh_test_before.gdx', cd0_h=cd0_h;
+*display cd0_h;
+cd0_h(yr,r,"oil",h) = cd0(yr,r,"oil") * vmt_hh(h,"pct");
+execute_unload '%system.fp%gdx%sep%hh_test_after.gdx', cd0_h=cd0_h;
 * SHANE's CHANGES END
 
 
